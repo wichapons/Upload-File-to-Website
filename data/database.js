@@ -6,7 +6,7 @@ let database;
 
 async function connectToDatabase() {
   const client = await MongoClient.connect('mongodb://127.0.0.1:27017');
-  database = client.db('file-demo');
+  database = client.db('file-demo'); //acess to file Demo schema if does not exist it will create a new one.
 }
 
 function getDb() {
