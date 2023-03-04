@@ -41,3 +41,9 @@
   margin: 0.5rem 0;
 }
 
+#preview-pic{
+  width: 4rem;
+  height: 4rem;
+  display: none;
+  object-fit: cover;
+}
