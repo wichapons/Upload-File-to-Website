@@ -14,8 +14,11 @@ const storageConfig = multer.diskStorage({
 
 const upload =  multer({storage:storageConfig });
 
-router.get('/', function(req, res) {
-  res.render('profiles');
+router.get('/',async function(req, res) {
+  const data = await db.getDb().collection('users').find().toArray();
+
+  console.log(data);
+  res.render('profiles',{userdata:data});
 });
 
 router.get('/new-user', function(req, res) {
@@ -25,11 +28,12 @@ router.get('/new-user', function(req, res) {
 router.post('/profiles', upload.single('image'),async (req,res)=>{
   const uploadedFile = req.file;
   const userData = req.body;
+  const filePath = uploadedFile.path.replace(/\\/g, '/'); //the path is started with \\ which should be / so it need to be replaced
+  console.log(uploadedFile);
   await db.getDb().collection('users').insertOne({
     name: userData.username,
-    imagePath: uploadedFile.path
+    imagePath: filePath
   });
-
   console.log(uploadedFile);
   res.redirect('/')
 });

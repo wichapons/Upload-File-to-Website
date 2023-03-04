@@ -15,12 +15,14 @@
     </section>
     <section id="user-profiles">
       <ul>
+        <% for (const data of userdata) {%>
         <li class="user-item">
           <article>
-            <img src="" alt="The image of the user.">
-            <h2>User name</h2>
+            <img src="<%= data.imagePath %>" alt="The image of the user.">
+            <h2><%=data.name%></h2>
           </article>
         </li>
+        <% } %>
       </ul>
     </section>
   </main>
